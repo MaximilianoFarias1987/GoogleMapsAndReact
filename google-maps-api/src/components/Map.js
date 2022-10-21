@@ -9,30 +9,24 @@ export default function ContentMap() {
 
   const [location, setLocation] = useState({});
 
-  const address = 'utn frc';
+  const address = '24 de septiembre 1026';
   const province = 'Cordoba';
-  const apikey = 'AIzaSyCj7jve3wn3l_c-ZLDwYOO_bx3UaoO-dig';
+  const apikey = process.env.REACT_APP_API_KEY;
 
   const getLocation = async () => {
     const response = await getLatLng(address,province,apikey);
     console.log(response);
     setLocation(response.data.results[0].geometry.location)
   }
-  console.log(location.lat);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyCj7jve3wn3l_c-ZLDwYOO_bx3UaoO-dig',
-    libraries: ['places']
+    googleMapsApiKey: apikey
   });
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <>
       <button onClick={getLocation}>Obtener ubicación</button>
-      {/* <br/>
-      <br/>
-      <li><strong>LATITUD:</strong> {location.lat}</li>
-      <li><strong>LONGITUD:</strong> {location.lng}</li> */}
       {location.lat !== undefined ? <MapCOmponent lat={location.lat} lng={location.lng}/> : null}
       
     </>

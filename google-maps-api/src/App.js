@@ -1,6 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import ContentMap, { DisplayMapFC } from './components/Map';
+import ContentMap from './components/Map';
 
 function App() {
   return (
